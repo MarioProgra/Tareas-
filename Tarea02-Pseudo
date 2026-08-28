@@ -1,0 +1,11 @@
+Algoritmo Suma2numeros 
+	//Definicion de variables
+	Definir Numero1,Numero2 Como Real
+	//Entrada 
+	Escribir "Ingrese el primer numero" 
+	leer Numero1
+	Escribir "Ingrese el segundo numero"
+	Leer Numero2
+	//Proceso 
+	Escribir "Suma=" Numero1+Numero2
+FinAlgoritmo 
