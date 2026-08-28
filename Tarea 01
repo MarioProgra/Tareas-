@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+double edad,semestre,promedio;
+string nombre,carrera;
+ cout<< "Ingrese la carrera: ";
+ cin>> carrera;
+ cout<< "Ingrese la edad:";
+ cin>> edad;
+ cout<< "Ingrese el semestre: ";
+ cin>> semestre;
+ cout<< "Ingrese el nombre: ";
+ cin>> nombre;
+ //Salida
+ cout <<"Su nombre es:"
+      <<nombre<<endl;
+cout<< "Su carrera es:"
+    <<carrera<<endl;
+cout<<"Su edad es:"
+    <<edad<<endl;
+cout <<"Su semestre es:"
+     <<semestre<<endl;
+return 0;
+}
