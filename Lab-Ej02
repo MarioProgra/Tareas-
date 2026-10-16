@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+// Funcion para leer un numero entero positivo
+int leerNumero() {
+    int N;
+
+    do {
+        cout << "Ingrese un numero entero positivo: ";
+        cin >> N;
+    } while (N <= 0);
+
+    return N;
+}
+
+// Funcion para sumar los numeros desde 1 hasta N usando for
+long long sumarHastaN(int N) {
+    long long suma = 0;
+
+    for (int i = 1; i <= N; i++) {
+        suma += i;
+    }
+
+    return suma;
+}
+
+// Funcion para contar los digitos usando while
+int contarDigitos(int N) {
+    int contador = 0;
+
+    while (N > 0) {
+        contador++;
+        N /= 10;
+    }
+
+    return contador;
+}
+
+// Funcion para sumar los digitos usando do-while
+int sumarDigitos(int N) {
+    int suma = 0;
+
+    do {
+        suma += N % 10;
+        N /= 10;
+    } while (N > 0);
+
+    return suma;
+}
+
+// Funcion para mostrar los resultados
+void mostrarResultados(long long suma,
+                       int cantidadDigitos,
+                       int sumaDigitos) {
+    cout << "\n--- RESULTADOS ---" << endl;
+    cout << "Suma desde 1 hasta N: " << suma << endl;
+    cout << "Cantidad de digitos: " << cantidadDigitos << endl;
+    cout << "Suma de los digitos: " << sumaDigitos << endl;
+}
+
+// Funcion principal
+int main() {
+    int N;
+
+    N = leerNumero();
+
+    long long suma = sumarHastaN(N);
+    int cantidad = contarDigitos(N);
+    int sumaD = sumarDigitos(N);
+
+    mostrarResultados(suma, cantidad, sumaD);
+
+    return 0;
+}
