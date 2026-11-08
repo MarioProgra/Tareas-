@@ -1,0 +1,20 @@
+#include <iostream>
+
+using namespace std;
+
+int FAC(int n) {
+    int factorial = 1;
+    for (int i = 1; i <= n; i++) {
+        factorial = factorial * i;
+    }
+    return factorial;
+}
+
+int main() {
+    int numero;
+    cout << "Ingrese un numero entero: ";
+    cin >> numero;
+    
+    cout << "El factorial de " << numero << " es: " << FAC(numero) << endl;
+    return 0;
+}
