@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+int dias_totales(int d, int m, int a) {
+    int dias = a * 365 + d;
+    int dias_del_mes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    for (int i = 1; i < m; i++) {
+        dias = dias + dias_del_mes[i];
+    }
+    
+    dias = dias + (a / 4) - (a / 100) + (a / 400);
+    
+    if (m <= 2 && ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0))) {
+        dias = dias - 1;
+    }
+    
+    return dias;
+}
+
+void DIAS_TRANSCURRIDOS(int d1, int m1, int a1, int d2, int m2, int a2) {
+    int dias_fecha1 = dias_totales(d1, m1, a1);
+    int dias_fecha2 = dias_totales(d2, m2, a2);
+    
+    int diferencia = dias_fecha1 - dias_fecha2;
+    
+    if (diferencia < 0) {
+        diferencia = diferencia * -1;
+    }
+    
+    cout << "Dias transcurridos entre ambas fechas: " << diferencia << " dias." << endl;
+}
+
+int main() {
+    int d1, m1, a1;
+    int d2, m2, a2;
+    
+    cout << "Ingrese la PRIMERA fecha (dia mes anio): ";
+    cin >> d1 >> m1 >> a1;
+    cout << "Ingrese la SEGUNDA fecha (dia mes anio): ";
+    cin >> d2 >> m2 >> a2;
+    
+    DIAS_TRANSCURRIDOS(d1, m1, a1, d2, m2, a2);
+    return 0;
+}
