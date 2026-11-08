@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void A_ROMANO(int N) {
+    int valores[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    string simbolos[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    string romano = "";
+    
+    for (int i = 0; i < 13; i++) {
+        while (N >= valores[i]) {
+            romano = romano + simbolos[i];
+            N = N - valores[i];
+        }
+    }
+    
+    cout << "Equivalente en romano: " << romano << endl;
+}
+
+int main() {
+    int numero;
+    cout << "Ingrese un numero para convertir a romano: ";
+    cin >> numero;
+    
+    A_ROMANO(numero);
+    return 0;
+}
