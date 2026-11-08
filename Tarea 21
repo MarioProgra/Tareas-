@@ -1,0 +1,20 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void NUM_LITERAL(double R) {
+    int parte_entera = R;
+    int parte_decimal = (R - parte_entera) * 100;
+    
+    cout << parte_entera << " " << parte_decimal << "/100 bolivianos" << endl;
+}
+
+int main() {
+    double R;
+    cout << "Ingrese una cantidad en bolivianos (ej. 1560.50): ";
+    cin >> R;
+    
+    NUM_LITERAL(R);
+    return 0;
+}
