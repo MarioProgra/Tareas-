@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+long long FAC(int n) {
+    long long factorial = 1;
+    for (int i = 1; i <= n; i++) {
+        factorial = factorial * i;
+    }
+    return factorial;
+}
+
+long long Combi(int n, int r) {
+    if (n < r) {
+        return 0; // Invalido
+    }
+    long long combinatorio;
+    combinatorio = FAC(n) / (FAC(r) * FAC(n - r));
+    return combinatorio;
+}
+
+int main() {
+    int n, r;
+    cout << "Ingrese n: "; cin >> n;
+    cout << "Ingrese r: "; cin >> r;
+    
+    cout << "El numero combinatorio es: " << Combi(n, r) << endl;
+    return 0;
+}
