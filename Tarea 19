@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int BINARIO_A_DECIMAL(int X) {
+    int decimal = 0;
+    int multiplicador = 1;
+    int digito;
+    
+    while (X > 0) {
+        digito = X % 10;
+        decimal = decimal + (digito * multiplicador); 
+        multiplicador = multiplicador * 2;
+        X = X / 10;
+    }
+    
+    return decimal;
+}
+
+int main() {
+    int binario;
+    cout << "Ingrese un numero binario (solo 0s y 1s): ";
+    cin >> binario;
+    
+    cout << "Su equivalente en decimal es: " << BINARIO_A_DECIMAL(binario) << endl;
+    return 0;
+}
