@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void LITERAL(int d, int m, int a) {
+    string meses[] = {"", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    
+    if (m >= 1 && m <= 12) {
+        cout << "LITERAL(" << d << ", " << m << ", " << a << ") = ";
+        cout << "'" << d << " de " << meses[m] << " de ";
+        if (a < 100) {
+            cout << "19" << a << "'" << endl;
+        } else {
+            cout << a << "'" << endl;
+        }
+    } else {
+        cout << "Mes invalido." << endl;
+    }
+}
+
+int main() {
+    int dia, mes, anio;
+    cout << "Ingrese el dia: "; cin >> dia;
+    cout << "Ingrese el mes: "; cin >> mes;
+    cout << "Ingrese el anio (ej. 99): "; cin >> anio;
+    
+    LITERAL(dia, mes, anio);
+    return 0;
+}
