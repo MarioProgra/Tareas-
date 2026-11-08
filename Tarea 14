@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double POTEN(double x, double y) {
+    return pow(x, y);
+}
+
+int FAC(int n) {
+    int factorial = 1;
+    for (int i = 1; i <= n; i++) {
+        factorial = factorial * i;
+    }
+    return factorial;
+}
+
+int main() {
+    double x;
+    int N;
+    double suma = 0.0;
+    int exponente = 1;
+    int signo = 1; // 1 para positivo, -1 para negativo
+    
+    cout << "Ingrese el valor de X: ";
+    cin >> x;
+    cout << "Ingrese el limite (N): ";
+    cin >> N;
+    
+    while (exponente <= N) {
+        suma = suma + (signo * (POTEN(x, exponente) / FAC(exponente)));
+        signo = signo * -1; // Alterna el signo
+        exponente = exponente + 2; // Sube de 2 en 2 (1, 3, 5...)
+    }
+    
+    cout << "La suma de la serie es: " << suma << endl;
+    return 0;
+}
