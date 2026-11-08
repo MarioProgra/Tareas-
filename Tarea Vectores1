@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+void leer(double v[], int &n);
+void mostrar(double v[], int n);
+double obtenerMaximo(double v[], int n);
+
+int main() {
+    int n;
+    double vector[100];
+    leer(vector, n);
+    mostrar(vector, n);
+    cout << "El valor maximo es: " << obtenerMaximo(vector, n) << endl;
+    return 0;
+}
+
+void leer(double v[], int &n) {
+    do {
+        cout << "Cantidad de elementos (n > 0): ";
+        cin >> n;
+    } while (n <= 0 || n > 100);
+    for (int i = 0; i < n; i++) {
+        cout << "Elemento [" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(double v[], int n) {
+    cout << "Vector: [";
+    for (int i = 0; i < n; i++) cout << v[i] << (i == n - 1 ? "" : ", ");
+    cout << "]" << endl;
+}
+
+double obtenerMaximo(double v[], int n) {
+    double maximo = v[0];
+    for (int i = 1; i < n; i++) {
+        if (v[i] > maximo) maximo = v[i];
+    }
+    return maximo;
+}
