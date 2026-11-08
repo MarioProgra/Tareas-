@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+void leer(int v[], int &n, string nombre);
+void mostrar(int v[], int n, string nombre);
+void concatenar(int A[], int nA, int B[], int nB, int C[], int &nC);
+
+int main() {
+    int nA, nB, nC;
+    int A[100], B[100], C[200];
+    
+    leer(A, nA, "Vector A");
+    leer(B, nB, "Vector B");
+    
+    concatenar(A, nA, B, nB, C, nC);
+    
+    mostrar(A, nA, "Vector A");
+    mostrar(B, nB, "Vector B");
+    mostrar(C, nC, "Vector C (Concatenado)");
+    
+    return 0;
+}
+
+void leer(int v[], int &n, string nombre) {
+    cout << "Cantidad de elementos para " << nombre << ": "; cin >> n;
+    for (int i = 0; i < n; i++) cin >> v[i];
+}
+
+void mostrar(int v[], int n, string nombre) {
+    cout << nombre << ": [";
+    for (int i = 0; i < n; i++) cout << v[i] << (i == n - 1 ? "" : ", ");
+    cout << "]" << endl;
+}
+
+void concatenar(int A[], int nA, int B[], int nB, int C[], int &nC) {
+    nC = nA + nB;
+    for (int i = 0; i < nA; i++) C[i] = A[i];
+    for (int i = 0; i < nB; i++) C[nA + i] = B[i];
+}
