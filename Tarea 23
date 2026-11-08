@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double REDONDEAR(double R, int n) {
+    double factor = pow(10, n);
+    double numero = R * factor;
+    double redondeado = round(numero) / factor;
+    
+    return redondeado;
+}
+
+int main() {
+    double numero_real;
+    int n_decimales;
+    
+    cout << "Ingrese el numero real: ";
+    cin >> numero_real;
+    cout << "A cuantos decimales desea redondear?: ";
+    cin >> n_decimales;
+    
+    cout << "Numero redondeado: " << REDONDEAR(numero_real, n_decimales) << endl;
+    return 0;
+}
