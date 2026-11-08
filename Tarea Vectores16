@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+void leer(int v[], int &n);
+void ordenarAscendente(int v[], int n); // Requisito para búsqueda binaria
+int busquedaBinaria(int v[], int n, int x);
+
+int main() {
+    int n, x, vector[100];
+    leer(vector, n);
+    ordenarAscendente(vector, n);
+    
+    cout << "Vector ordenado listo para busqueda." << endl;
+    cout << "Ingrese el valor a buscar: ";
+    cin >> x;
+    
+    int pos = busquedaBinaria(vector, n, x);
+    if (pos != -1) cout << "Elemento encontrado en el indice: " << pos << endl;
+    else cout << "Elemento no encontrado." << endl;
+    
+    return 0;
+}
+
+void leer(int v[], int &n) {
+    cout << "Cantidad de elementos: "; cin >> n;
+    for (int i = 0; i < n; i++) cin >> v[i];
+}
+
+void ordenarAscendente(int v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (v[j] > v[j + 1]) {
+                int aux = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = aux;
+            }
+        }
+    }
+}
+
+int busquedaBinaria(int v[], int n, int x) {
+    int inicio = 0, fin = n - 1;
+    while (inicio <= fin) {
+        int mitad = inicio + (fin - inicio) / 2;
+        if (v[mitad] == x) return mitad;
+        if (v[mitad] < x) inicio = mitad + 1;
+        else fin = mitad - 1;
+    }
+    return -1;
+}
