@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double POTEN(double x, double y) {
+    return pow(x, y);
+}
+
+int FAC(int n) {
+    int factorial = 1;
+    for (int i = 1; i <= n; i++) {
+        factorial = factorial * i;
+    }
+    return factorial;
+}
+
+int main() {
+    double x;
+    int N;
+    double suma = 0.0;
+    
+    cout << "Ingrese el valor de X: ";
+    cin >> x;
+    cout << "Ingrese el limite de la serie (N): ";
+    cin >> N;
+    
+    for (int i = 1; i <= N; i++) {
+        suma = suma + (POTEN(x, i) / FAC(i));
+    }
+    
+    cout << "La suma de la serie es: " << suma << endl;
+    return 0;
+}
