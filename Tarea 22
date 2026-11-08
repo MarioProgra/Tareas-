@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+bool VALIDAR_FECHA(int d, int m, int a) {
+    if (m < 1 || m > 12) {
+        return false;
+    }
+    
+    int dias_del_mes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    if ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0)) {
+        dias_del_mes[2] = 29;
+    }
+    
+    if (d >= 1 && d <= dias_del_mes[m]) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int main() {
+    int d, m, a;
+    cout << "Ingrese la fecha a validar (dia mes anio): ";
+    cin >> d >> m >> a;
+    
+    if (VALIDAR_FECHA(d, m, a)) {
+        cout << "La fecha es CORRECTA y VALIDA." << endl;
+    } else {
+        cout << "La fecha es INVALIDA." << endl;
+    }
+    
+    return 0;
+}
