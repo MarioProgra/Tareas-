@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    float p1, p2, ef, pi, nota_final;
+
+    cout << "Ingrese las notas de los dos parciales, examen final y proyecto: ";
+    cin >> p1 >> p2 >> ef >> pi;
+
+    nota_final = p1 + p2 + ef + pi;
+
+    cout << "Nota Final: " << nota_final << endl;
+
+    if (nota_final >= 51) {
+        cout << "ESTADO: APROBO" << endl;
+    } else {
+        cout << "ESTADO: REPROBO" << endl;
+    }
+
+    return 0;
+}
