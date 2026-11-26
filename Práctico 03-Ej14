@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    float kwh, costo = 0, total;
+
+    cout << "Ingrese el consumo mensual en kWh: ";
+    cin >> kwh;
+
+    if (kwh == 0) {
+        cout << "SIN CONSUMO REGISTRADO" << endl;
+    } else {
+        if (kwh <= 100) {
+            costo = kwh * 0.30;
+        } else if (kwh <= 300) {
+            costo = kwh * 0.50;
+        } else if (kwh <= 600) {
+            costo = kwh * 0.75;
+        } else {
+            costo = kwh * 1.10;
+        }
+
+        total = costo + 8.00;
+
+        cout << "Monto a pagar: " << total << " Bs." << endl;
+    }
+
+    return 0;
+}
