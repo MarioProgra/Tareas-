@@ -1,0 +1,16 @@
+Algoritmo DescuentoCompra
+    Definir monto, descuento, total Como Real
+
+    Escribir "Ingrese el monto de la compra"
+    Leer monto
+
+    Si monto > 100 Entonces
+        descuento <- monto * 0.10
+    SiNo
+        descuento <- 0
+    FinSi
+
+    total <- monto - descuento
+
+    Escribir "El total a pagar es: ", total, " Bs"
+FinAlgoritmo
