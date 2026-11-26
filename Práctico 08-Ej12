@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void leer(int v[], int &n);
+void mostrar(int v[], int n, string nombre);
+void eliminarDuplicados(int A[], int n, int B[], int &m);
+
+int main() {
+    int A[100], B[100], n, m;
+    leer(A, n);
+    eliminarDuplicados(A, n, B, m);
+    mostrar(A, n, "Original");
+    mostrar(B, m, "Sin duplicados");
+    return 0;
+}
+
+void leer(int v[], int &n) {
+    cout << "Cantidad: "; cin >> n;
+    for (int i = 0; i < n; i++) cin >> v[i];
+}
+
+void mostrar(int v[], int n, string nombre) {
+    cout << nombre << ": ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << endl;
+}
+
+void eliminarDuplicados(int A[], int n, int B[], int &m) {
+    m = 0;
+    for (int i = 0; i < n; i++) {
+        bool existe = false;
+        for (int j = 0; j < m; j++) {
+            if (A[i] == B[j]) { existe = true; break; }
+        }
+        if (!existe) {
+            B[m] = A[i];
+            m++;
+        }
+    }
+}
