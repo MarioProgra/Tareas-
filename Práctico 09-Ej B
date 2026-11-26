@@ -1,0 +1,456 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX_RES = 20;
+
+// Prototipos de funciones
+string leerTextoValido(string mensaje);
+int leerEnteroValido(string mensaje, int minimo);
+int buscarHabitacion(int habitaciones[], int n, int hab);
+
+// Ejercicio 1: Registrar y mostrar una reserva
+void registrarReserva(string &nombre, string &apellido, int &habitacion, int &noches);
+void mostrarReserva(string nombre, string apellido, int habitacion, int noches);
+
+// Ejercicio 2: Registrar y mostrar varias reservas
+void registrarReservas(string nombres[], string apellidos[], int habitaciones[], int noches[], int &n);
+void mostrarReservas(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+// Ejercicio 3: Buscar huespedes (busqueda parcial con find)
+void buscarHuespedes(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+// Ejercicio 4: Actualizar noches
+int buscarReserva(string nombres[], string apellidos[], int habitaciones[], int n, int hab, string nom, string ape);
+void actualizarNoches(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+// Ejercicio 5: Registrar salida anticipada
+void reducirNoches(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+// Ejercicio 6: Ampliar una reserva
+void ampliarReserva(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+// Ejercicio 7: Generar codigos de reserva
+string generarCodigo(string nombre, string apellido, int habitacion);
+void mostrarCodigosReserva(string nombres[], string apellidos[], int habitaciones[], int n);
+
+// Ejercicio 8: Consultar reservas por apellido
+void buscarPorApellido(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+// Ejercicio 9: Corregir datos de huespedes
+void corregirNombre(string nombres[], string apellidos[], int habitaciones[], int n);
+void agregarPrefijo(string &nombre);
+void quitarPrefijo(string &nombre);
+
+// Ejercicio 10: Menu y resumen
+void mostrarMenu();
+void mostrarResumen(string nombres[], string apellidos[], int habitaciones[], int noches[], int n);
+
+int main() {
+    string nombres[MAX_RES];
+    string apellidos[MAX_RES];
+    int habitaciones[MAX_RES];
+    int noches[MAX_RES];
+    int n = 0; // Reservas activas
+    int opcion;
+
+    do {
+        mostrarMenu();
+        cin >> opcion;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            opcion = -1;
+        } else {
+            cin.ignore(1000, '\n');
+        }
+
+        if (opcion >= 2 && opcion <= 10 && n == 0) {
+            cout << "\n[!] No hay reservas activas. Registre al menos una primero.\n";
+            continue;
+        }
+
+        switch (opcion) {
+            case 1:
+                registrarReservas(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 2:
+                mostrarReservas(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 3:
+                buscarHuespedes(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 4:
+                actualizarNoches(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 5:
+                reducirNoches(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 6:
+                ampliarReserva(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 7:
+                mostrarCodigosReserva(nombres, apellidos, habitaciones, n);
+                break;
+            case 8:
+                buscarPorApellido(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 9:
+                corregirNombre(nombres, apellidos, habitaciones, n);
+                break;
+            case 10:
+                mostrarResumen(nombres, apellidos, habitaciones, noches, n);
+                break;
+            case 0:
+                cout << "\nSaliendo del sistema de reservas...\n";
+                break;
+            default:
+                cout << "\n[!] Opcion invalida. Intente nuevamente.\n";
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
+
+// --- DEFINICION DE FUNCIONES ---
+
+string leerTextoValido(string mensaje) {
+    string texto;
+    while (true) {
+        cout << mensaje;
+        getline(cin, texto);
+        // Uso de empty() y length()
+        if (texto.empty()) {
+            cout << "[!] Error: El campo no puede estar vacio.\n";
+        } else if (texto.length() < 3) {
+            cout << "[!] Error: Debe tener al menos 3 caracteres.\n";
+        } else {
+            return texto;
+        }
+    }
+}
+
+int leerEnteroValido(string mensaje, int minimo) {
+    int valor;
+    while (true) {
+        cout << mensaje;
+        cin >> valor;
+        if (cin.fail() || valor < minimo) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "[!] Error: Ingrese un entero mayor o igual a " << minimo << ".\n";
+        } else {
+            cin.ignore(1000, '\n');
+            return valor;
+        }
+    }
+}
+
+int buscarHabitacion(int habitaciones[], int n, int hab) {
+    for (int i = 0; i < n; i++) {
+        if (habitaciones[i] == hab) return i;
+    }
+    return -1;
+}
+
+// Ejercicio 1
+void registrarReserva(string &nombre, string &apellido, int &habitacion, int &noches) {
+    nombre = leerTextoValido("Nombre del huesped (min 3 letras): ");
+    apellido = leerTextoValido("Apellido del huesped (min 3 letras): ");
+    habitacion = leerEnteroValido("Numero de habitacion (> 0): ", 1);
+    noches = leerEnteroValido("Noches reservadas (> 0): ", 1);
+}
+
+void mostrarReserva(string nombre, string apellido, int habitacion, int noches) {
+    cout << "Huesped: " << nombre << " " << apellido
+         << " | Hab: " << habitacion << " | Noches: " << noches << endl;
+}
+
+// Ejercicio 2
+void registrarReservas(string nombres[], string apellidos[], int habitaciones[], int noches[], int &n) {
+    if (n >= MAX_RES) {
+        cout << "\n[!] Hotel lleno (" << MAX_RES << " reservas activas).\n";
+        return;
+    }
+
+    int disponibles = MAX_RES - n;
+    int cant;
+    do {
+        cant = leerEnteroValido("Cuantas reservas desea registrar (1 a " + to_string(disponibles) + ")?: ", 1);
+        if (cant > disponibles) {
+            cout << "[!] Solo quedan " << disponibles << " cupos.\n";
+        }
+    } while (cant > disponibles);
+
+    for (int i = 0; i < cant; i++) {
+        cout << "\n--- Reserva #" << (n + 1) << " ---\n";
+        string nom, ape;
+        int hab, noc;
+        registrarReserva(nom, ape, hab, noc);
+
+        if (buscarHabitacion(habitaciones, n, hab) != -1) {
+            cout << "[!] Error: La habitacion " << hab << " ya tiene una reserva activa. Elija otra.\n";
+            i--;
+        } else {
+            nombres[n] = nom;
+            apellidos[n] = ape;
+            habitaciones[n] = hab;
+            noches[n] = noc;
+            n++;
+            cout << "-> Reserva confirmada: ";
+            mostrarReserva(nom, ape, hab, noc);
+        }
+    }
+}
+
+void mostrarReservas(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    cout << "\n=== LISTADO DE RESERVAS (" << n << "/" << MAX_RES << ") ===\n";
+    for (int i = 0; i < n; i++) {
+        cout << "[" << i << "] ";
+        mostrarReserva(nombres[i], apellidos[i], habitaciones[i], noches[i]);
+    }
+}
+
+// Ejercicio 3
+void buscarHuespedes(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    string parteNombre;
+    cout << "\nIngrese parte del nombre a buscar: ";
+    getline(cin, parteNombre);
+    if (parteNombre.empty()) {
+        cout << "[!] Texto de busqueda vacio.\n";
+        return;
+    }
+
+    int cont = 0;
+    cout << "\n--- Coincidencias encontradas ---\n";
+    for (int i = 0; i < n; i++) {
+        // Uso de find()
+        if (nombres[i].find(parteNombre) != string::npos) {
+            cout << "[" << i << "] ";
+            mostrarReserva(nombres[i], apellidos[i], habitaciones[i], noches[i]);
+            cont++;
+        }
+    }
+    if (cont == 0) {
+        cout << "No se encontraron huespedes con '" << parteNombre << "'.\n";
+    }
+}
+
+// Busqueda exacta con compare()
+int buscarReserva(string nombres[], string apellidos[], int habitaciones[], int n, int hab, string nom, string ape) {
+    int idx = buscarHabitacion(habitaciones, n, hab);
+    if (idx != -1) {
+        // Uso de compare()
+        if (nombres[idx].compare(nom) == 0 && apellidos[idx].compare(ape) == 0) {
+            return idx;
+        }
+    }
+    return -1;
+}
+
+// Ejercicio 4
+void actualizarNoches(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    cout << "\n--- Actualizar Noches ---\n";
+    int hab = leerEnteroValido("Numero de habitacion: ", 1);
+    string nom = leerTextoValido("Nombre exacto del huesped: ");
+    string ape = leerTextoValido("Apellido exacto del huesped: ");
+
+    int idx = buscarReserva(nombres, apellidos, habitaciones, n, hab, nom, ape);
+    if (idx == -1) {
+        cout << "[!] No existe una reserva con esos datos exactos.\n";
+        return;
+    }
+
+    int nuevasNoches = leerEnteroValido("Nueva cantidad de noches (> 0): ", 1);
+    int anteriores = noches[idx];
+    noches[idx] = nuevasNoches;
+    cout << "Actualizado -> Noches anteriores: " << anteriores << " | Noches nuevas: " << noches[idx] << endl;
+}
+
+// Ejercicio 5
+void reducirNoches(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    cout << "\n--- Salida Anticipada (Reducir Noches) ---\n";
+    int hab = leerEnteroValido("Numero de habitacion: ", 1);
+    string nom = leerTextoValido("Nombre exacto: ");
+    string ape = leerTextoValido("Apellido exacto: ");
+
+    int idx = buscarReserva(nombres, apellidos, habitaciones, n, hab, nom, ape);
+    if (idx == -1) {
+        cout << "[!] Reserva no encontrada.\n";
+        return;
+    }
+
+    cout << "Noches actuales: " << noches[idx] << endl;
+    if (noches[idx] <= 1) {
+        cout << "[!] La reserva solo tiene 1 noche; no se puede reducir sin cancelar.\n";
+        return;
+    }
+
+    int reducir = leerEnteroValido("Noches a reducir (> 0): ", 1);
+    if (reducir >= noches[idx]) {
+        cout << "[!] Operacion invalida: la reduccion debe ser menor a las " << noches[idx] << " noches actuales.\n";
+    } else {
+        noches[idx] -= reducir;
+        cout << "Salida anticipada registrada. Noches restantes: " << noches[idx] << endl;
+    }
+}
+
+// Ejercicio 6
+void ampliarReserva(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    cout << "\n--- Ampliar Reserva ---\n";
+    int hab = leerEnteroValido("Numero de habitacion: ", 1);
+    string fragNombre;
+    cout << "Nombre (o fragmento) del huesped: ";
+    getline(cin, fragNombre);
+
+    int idx = buscarHabitacion(habitaciones, n, hab);
+    // Uso de find() para verificar al huesped
+    if (idx == -1 || fragNombre.empty() || nombres[idx].find(fragNombre) == string::npos) {
+        cout << "[!] No coincide la habitacion con el huesped indicado.\n";
+        return;
+    }
+
+    int extra = leerEnteroValido("Noches adicionales (> 0): ", 1);
+    int anterior = noches[idx];
+    noches[idx] += extra;
+    cout << "Reserva ampliada -> Antes: " << anterior << " noches | Ahora: " << noches[idx] << " noches.\n";
+}
+
+// Ejercicio 7
+string generarCodigo(string nombre, string apellido, int habitacion) {
+    // Uso de length() y substr()
+    string pNom = (nombre.length() >= 3) ? nombre.substr(0, 3) : nombre;
+    string pApe = (apellido.length() >= 3) ? apellido.substr(0, 3) : apellido;
+    return pNom + pApe + to_string(habitacion);
+}
+
+void mostrarCodigosReserva(string nombres[], string apellidos[], int habitaciones[], int n) {
+    cout << "\n=== CODIGOS DE RESERVA ===\n";
+    for (int i = 0; i < n; i++) {
+        cout << "[" << i << "] " << nombres[i] << " " << apellidos[i]
+             << " (Hab " << habitaciones[i] << ") -> Codigo: "
+             << generarCodigo(nombres[i], apellidos[i], habitaciones[i]) << endl;
+    }
+}
+
+// Ejercicio 8
+void buscarPorApellido(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    string apeBuscado = leerTextoValido("\nIngrese apellido exacto a consultar: ");
+    int cont = 0;
+    cout << "\n--- Reservas con apellido '" << apeBuscado << "' ---\n";
+    for (int i = 0; i < n; i++) {
+        // Uso de compare()
+        if (apellidos[i].compare(apeBuscado) == 0) {
+            mostrarReserva(nombres[i], apellidos[i], habitaciones[i], noches[i]);
+            cont++;
+        }
+    }
+    if (cont == 0) {
+        cout << "No hay reservas registradas con el apellido '" << apeBuscado << "'.\n";
+    } else {
+        cout << "Total de coincidencias: " << cont << endl;
+    }
+}
+
+// Ejercicio 9
+void agregarPrefijo(string &nombre) {
+    // Uso de find() e insert()
+    if (nombre.find("Sr-") == 0) {
+        cout << "[!] El nombre ya posee el prefijo 'Sr-'.\n";
+    } else {
+        nombre.insert(0, "Sr-");
+        cout << "Prefijo 'Sr-' agregado.\n";
+    }
+}
+
+void quitarPrefijo(string &nombre) {
+    // Uso de find(), length() y erase()
+    if (nombre.find("Sr-") == 0 && nombre.length() >= 3) {
+        nombre.erase(0, 3);
+        cout << "Prefijo 'Sr-' eliminado.\n";
+    } else {
+        cout << "[!] El nombre no comienza con 'Sr-'.\n";
+    }
+}
+
+void corregirNombre(string nombres[], string apellidos[], int habitaciones[], int n) {
+    cout << "\n--- Corregir Nombre de Huesped ---\n";
+    int hab = leerEnteroValido("Numero de habitacion de la reserva: ", 1);
+    int idx = buscarHabitacion(habitaciones, n, hab);
+    if (idx == -1) {
+        cout << "[!] Habitacion sin reserva activa.\n";
+        return;
+    }
+
+    cout << "Huesped actual: " << nombres[idx] << " " << apellidos[idx] << endl;
+    cout << "1. Reemplazar fragmento del nombre (replace)\n";
+    cout << "2. Agregar prefijo 'Sr-' (insert)\n";
+    cout << "3. Quitar prefijo 'Sr-' (erase)\n";
+    int op = leerEnteroValido("Elija operacion (1-3): ", 1);
+
+    string antes = nombres[idx];
+    if (op == 1) {
+        string buscarFrag, nuevoFrag;
+        cout << "Fragmento a reemplazar: ";
+        getline(cin, buscarFrag);
+        size_t pos = nombres[idx].find(buscarFrag);
+        if (buscarFrag.empty() || pos == string::npos) {
+            cout << "[!] Fragmento no encontrado.\n";
+            return;
+        }
+        cout << "Nuevo fragmento: ";
+        getline(cin, nuevoFrag);
+        if (nuevoFrag.empty()) {
+            cout << "[!] El reemplazo no puede ser vacio.\n";
+            return;
+        }
+        // Uso de replace()
+        nombres[idx].replace(pos, buscarFrag.length(), nuevoFrag);
+    } else if (op == 2) {
+        agregarPrefijo(nombres[idx]);
+    } else if (op == 3) {
+        quitarPrefijo(nombres[idx]);
+    } else {
+        cout << "[!] Opcion invalida.\n";
+        return;
+    }
+
+    cout << "Antes: " << antes << " -> Despues: " << nombres[idx] << endl;
+}
+
+// Ejercicio 10
+void mostrarResumen(string nombres[], string apellidos[], int habitaciones[], int noches[], int n) {
+    int totalNoches = 0;
+    int idxMayor = 0;
+
+    for (int i = 0; i < n; i++) {
+        totalNoches += noches[i];
+        if (noches[i] > noches[idxMayor]) {
+            idxMayor = i;
+        }
+    }
+
+    cout << "\n=== RESUMEN DE RESERVAS ===\n";
+    cout << "Total de reservas activas: " << n << endl;
+    cout << "Total de noches reservadas: " << totalNoches << endl;
+    cout << "Reserva de mayor duracion: " << nombres[idxMayor] << " " << apellidos[idxMayor]
+         << " (Hab " << habitaciones[idxMayor] << ") con " << noches[idxMayor] << " noches.\n";
+}
+
+void mostrarMenu() {
+    cout << "\n========================================\n";
+    cout << "   SISTEMA DE GESTION DE RESERVAS       \n";
+    cout << "========================================\n";
+    cout << "1. Registrar reservas\n";
+    cout << "2. Mostrar listado de reservas\n";
+    cout << "3. Buscar huesped por nombre\n";
+    cout << "4. Actualizar noches de reserva\n";
+    cout << "5. Registrar salida anticipada\n";
+    cout << "6. Ampliar reserva\n";
+    cout << "7. Generar codigos de reserva\n";
+    cout << "8. Consultar reservas por apellido\n";
+    cout << "9. Corregir nombre de huesped\n";
+    cout << "10. Resumen de reservas\n";
+    cout << "0. Salir\n";
+    cout << "Seleccione una opcion: ";
+}
