@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void leer(int &n);
+string numeroALetras(int n);
+
+int main() {
+    int n;
+    leer(n);
+    cout << "El numero en letras es: " << numeroALetras(n) << endl;
+    return 0;
+}
+
+void leer(int &n) {
+    do {
+        cout << "Ingrese un numero entre 0 y 20: ";
+        cin >> n;
+    } while (n < 0 || n > 20);
+}
+
+string numeroALetras(int n) {
+    string letras[] = {"CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS",
+                       "SIETE", "OCHO", "NUEVE", "DIEZ", "ONCE", "DOCE", "TRECE",
+                       "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE", "DIECIOCHO",
+                       "DIECINUEVE", "VEINTE"};
+    return letras[n];
+}
