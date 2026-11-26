@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string nombre;
+    float salario, aguinaldo;
+    int meses;
+
+    cout << "Ingrese el nombre del trabajador: ";
+    getline(cin, nombre);
+
+    cout << "Ingrese el salario mensual y los meses trabajados: ";
+    cin >> salario >> meses;
+
+    if (meses >= 12) {
+        aguinaldo = salario;
+    } else {
+        aguinaldo = (salario * meses) / 12.0;
+    }
+
+    cout << "Trabajador: " << nombre << endl;
+    cout << "Aguinaldo: " << aguinaldo << " Bs." << endl;
+
+    return 0;
+}
