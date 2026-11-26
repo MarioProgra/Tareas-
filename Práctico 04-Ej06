@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, i;
+    double x, potencia = 1, s = 0;
+
+    cout << "Ingrese X: ";
+    cin >> x;
+
+    cout << "Ingrese N: ";
+    cin >> n;
+
+    for (i = 1; i <= n; i++) {
+        potencia = potencia * x;
+        s = s + potencia;
+    }
+
+    cout << "S = " << s << endl;
+
+    return 0;
+}
