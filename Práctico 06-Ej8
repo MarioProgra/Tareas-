@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+void FACTURA(int cant_hamb, int cant_queso, int cant_papas, int cant_soda) {
+    double precio_hamb = 3.0;
+    double precio_queso = 5.0;
+    double precio_papas = 2.0;
+    double precio_soda = 2.5;
+    
+    double total_hamb = cant_hamb * precio_hamb;
+    double total_queso = cant_queso * precio_queso;
+    double total_papas = cant_papas * precio_papas;
+    double total_soda = cant_soda * precio_soda;
+    
+    double total = total_hamb + total_queso + total_papas + total_soda;
+    
+    cout << "----------------------------------" << endl;
+    cout << "ITEM                CANTIDAD    TOTAL PARCIAL" << endl;
+    cout << "Hamburguesas (3Bs)      " << cant_hamb << "         " << total_hamb << endl;
+    cout << "Hamburguesas con queso  " << cant_queso << "         " << total_queso << endl;
+    cout << "Papas fritas (2Bs)      " << cant_papas << "         " << total_papas << endl;
+    cout << "Soda (2.5Bs)            " << cant_soda << "         " << total_soda << endl;
+    cout << "T O T A L                           " << total << endl;
+    cout << "----------------------------------" << endl;
+}
+
+int main() {
+    int h, q, p, s;
+    cout << "Cant. Hamburguesas simples: "; cin >> h;
+    cout << "Cant. Hamburguesas c/queso: "; cin >> q;
+    cout << "Cant. Papas fritas: "; cin >> p;
+    cout << "Cant. Sodas: "; cin >> s;
+    
+    FACTURA(h, q, p, s);
+    return 0;
+}
