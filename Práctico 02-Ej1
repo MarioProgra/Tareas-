@@ -1,0 +1,21 @@
+Algoritmo Registro_De_Estudiante
+    Definir nombre, carrera, semestre Como Cadena
+    Definir edad Como Entero
+
+    Escribir "Ingrese nombre completo"
+    Leer nombre
+
+    Escribir "Ingrese edad"
+    Leer edad
+
+    Escribir "Ingrese carrera"
+    Leer carrera
+
+    Escribir "Ingrese semestre"
+    Leer semestre
+
+    Escribir "Nombre: ", nombre
+    Escribir "Edad: ", edad
+    Escribir "Carrera: ", carrera
+    Escribir "Semestre: ", semestre
+FinAlgoritmo
