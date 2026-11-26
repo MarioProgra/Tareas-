@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void leer(string nombres[], double notas[], int &n);
+void mostrarMejores(string nombres[], double notas[], int n);
+void ordenarPorNotas(string nombres[], double notas[], int n);
+
+int main() {
+    string nombres[100];
+    double notas[100];
+    int n;
+    leer(nombres, notas, n);
+    ordenarPorNotas(nombres, notas, n);
+    mostrarMejores(nombres, notas, n);
+    return 0;
+}
+
+void leer(string nombres[], double notas[], int &n) {
+    do {
+        cout << "Cantidad de alumnos (n >= 3): "; cin >> n;
+    } while (n < 3);
+    for (int i = 0; i < n; i++) {
+        cout << "Nombre del alumno " << i+1 << ": "; cin >> nombres[i];
+        do {
+            cout << "Nota (0-100): "; cin >> notas[i];
+        } while (notas[i] < 0 || notas[i] > 100);
+    }
+}
+
+void ordenarPorNotas(string nombres[], double notas[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (notas[j] < notas[j+1]) { // Descendente
+                double tempNota = notas[j];
+                notas[j] = notas[j+1];
+                notas[j+1] = tempNota;
+                string tempNombre = nombres[j];
+                nombres[j] = nombres[j+1];
+                nombres[j+1] = tempNombre;
+            }
+        }
+    }
+}
+
+void mostrarMejores(string nombres[], double notas[], int n) {
+    cout << "--- TRES MEJORES NOTAS ---" << endl;
+    for (int i = 0; i < 3 && i < n; i++) {
+        cout << i+1 << ". " << nombres[i] << " - " << notas[i] << endl;
+    }
+}
