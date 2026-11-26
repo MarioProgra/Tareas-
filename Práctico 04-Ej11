@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, aux, r;
+
+    cout << "Ingrese el primer numero: ";
+    cin >> a;
+
+    cout << "Ingrese el segundo numero: ";
+    cin >> b;
+
+    aux = a;
+    r = b;
+
+    while (r != 0) {
+        int resto = aux % r;
+        aux = r;
+        r = resto;
+    }
+
+    cout << "El MCD de " << a << " y " << b
+         << " es: " << aux << endl;
+
+    return 0;
+}
