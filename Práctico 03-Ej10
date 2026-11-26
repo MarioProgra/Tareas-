@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    float C, T, M, G;
+    int N;
+
+    cout << "Ingrese el capital, la tasa anual (%) y el plazo en años: ";
+    cin >> C >> T >> N;
+
+    M = C * pow(1 + (T / 12.0 / 100.0), N * 12);
+    G = M - C;
+
+    cout << "Monto acumulado M: " << M << endl;
+    cout << "Ganancia neta G: " << G << endl;
+
+    return 0;
+}
