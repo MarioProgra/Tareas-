@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void leer(int v[], int &n);
+void mostrar(int v[], int n, string msg);
+void invertirMismo(int v[], int n);
+
+int main() {
+    int A[100], n;
+    leer(A, n);
+    mostrar(A, n, "Antes");
+    invertirMismo(A, n);
+    mostrar(A, n, "Despues");
+    return 0;
+}
+
+void leer(int v[], int &n) {
+    cout << "Cantidad: "; cin >> n;
+    for (int i = 0; i < n; i++) cin >> v[i];
+}
+
+void mostrar(int v[], int n, string msg) {
+    cout << msg << ": ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << endl;
+}
+
+void invertirMismo(int v[], int n) {
+    for (int i = 0; i < n / 2; i++) {
+        int temp = v[i];
+        v[i] = v[n - 1 - i];
+        v[n - 1 - i] = temp;
+    }
+}
