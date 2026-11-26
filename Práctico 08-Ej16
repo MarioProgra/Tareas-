@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void registrar(string nombres[], double notas[], int &n);
+void listar(string nombres[], double notas[], int n);
+void ordenarAlfabeticamente(string nombres[], double notas[], int n);
+void mostrarMejor(string nombres[], double notas[], int n);
+void calcularPromedio(double notas[], int n);
+
+int main() {
+    string nombres[100];
+    double notas[100];
+    int n = 0, opcion;
+    do {
+        cout << "\n--- MENU ---\n1. Registrar\n2. Listar\n3. Ordenar alfabetico\n4. Mejor nota\n5. Promedio\n6. Salir\nOpcion: ";
+        cin >> opcion;
+        if (opcion > 1 && opcion < 6 && n == 0) {
+            cout << "Lista vacia, registre primero." << endl;
+            continue;
+        }
+        switch(opcion) {
+            case 1: registrar(nombres, notas, n); break;
+            case 2: listar(nombres, notas, n); break;
+            case 3: ordenarAlfabeticamente(nombres, notas, n); break;
+            case 4: mostrarMejor(nombres, notas, n); break;
+            case 5: calcularPromedio(notas, n); break;
+            case 6: cout << "Saliendo..." << endl; break;
+            default: cout << "Invalido" << endl;
+        }
+    } while(opcion != 6);
+    return 0;
+}
+
+void registrar(string nombres[], double notas[], int &n) {
+    if (n >= 100) { cout << "Lleno" << endl; return; }
+    cout << "Nombre: "; cin >> nombres[n];
+    do {
+        cout << "Nota (0-100): "; cin >> notas[n];
+    } while (notas[n] < 0 || notas[n] > 100);
+    n++;
+}
+
+void listar(string nombres[], double notas[], int n) {
+    for (int i = 0; i < n; i++) cout << nombres[i] << " - " << notas[i] << endl;
+}
+
+void ordenarAlfabeticamente(string nombres[], double notas[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (nombres[j] > nombres[j+1]) {
+                swap(nombres[j], nombres[j+1]);
+                swap(notas[j], notas[j+1]);
+            }
+        }
+    }
+    cout << "Ordenado alfabeticamente." << endl;
+}
+
+void mostrarMejor(string nombres[], double notas[], int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) if (notas[i] > notas[idx]) idx = i;
+    cout << "Mejor nota: " << nombres[idx] << " con " << notas[idx] << endl;
+}
+
+void calcularPromedio(double notas[], int n) {
+    double suma = 0;
+    for (int i = 0; i < n; i++) suma += notas[i];
+    cout << "Promedio general: " << suma / n << endl;
+}
