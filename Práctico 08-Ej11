@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+void leer(double v[], int &n);
+void contar(double v[], int n, int &pos, int &neg, int &ceros);
+
+int main() {
+    double v[100];
+    int n, pos, neg, ceros;
+    leer(v, n);
+    contar(v, n, pos, neg, ceros);
+    cout << "Positivos: " << pos << " Negativos: " << neg << " Ceros: " << ceros << endl;
+    return 0;
+}
+
+void leer(double v[], int &n) {
+    cout << "Cantidad de elementos: "; cin >> n;
+    for (int i = 0; i < n; i++) cin >> v[i];
+}
+
+void contar(double v[], int n, int &pos, int &neg, int &ceros) {
+    pos = neg = ceros = 0;
+    for (int i = 0; i < n; i++) {
+        if (v[i] > 0) pos++;
+        else if (v[i] < 0) neg++;
+        else ceros++;
+    }
+}
