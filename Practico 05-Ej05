@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long n, complemento = 0, posicion = 1;
+    int digito;
+
+    cout << "Ingrese un numero: ";
+    cin >> n;
+
+    while (n > 0) {
+        digito = n % 10;
+        complemento = complemento + (9 - digito) * posicion;
+        posicion = posicion * 10;
+        n = n / 10;
+    }
+
+    cout << "El complemento a 9 es: " << complemento << endl;
+    return 0;
+}
