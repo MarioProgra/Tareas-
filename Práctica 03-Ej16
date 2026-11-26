@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    float a, b, c;
+
+    cout << "Ingrese los valores de a, b y c: ";
+    cin >> a >> b >> c;
+
+    if (a == 0 && b == 0) {
+        cout << "Ecuacion degenerada (sin solucion o identidad)" << endl;
+    } 
+    else if (a == 0 && b != 0) {
+        cout << "Ecuacion lineal, una solucion x = " << -c / b << endl;
+    } 
+    else {
+        float D = b * b - 4 * a * c;
+
+        if (D > 0) {
+            float x1 = (-b + sqrt(D)) / (2 * a);
+            float x2 = (-b - sqrt(D)) / (2 * a);
+
+            cout << "Dos raices reales distintas: "
+                 << "x1 = " << x1 << ", x2 = " << x2 << endl;
+        } 
+        else if (D == 0) {
+            float x = -b / (2 * a);
+
+            cout << "Raiz real doble: x = " << x << endl;
+        } 
+        else {
+            float realPart = -b / (2 * a);
+            float imagPart = sqrt(-D) / (2 * a);
+
+            cout << "Raices complejas conjugadas: "
+                 << realPart << " + " << imagPart << "i y "
+                 << realPart << " - " << imagPart << "i" << endl;
+        }
+    }
+
+    return 0;
+}
