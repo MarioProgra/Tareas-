@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long n, copia, invertido = 0;
+    int digito;
+
+    cout << "Ingrese un numero: ";
+    cin >> n;
+
+    copia = n;
+    while (copia > 0) {
+        digito = copia % 10;
+        invertido = invertido * 10 + digito;
+        copia = copia / 10;
+    }
+
+    // si el numero al reves es igual al original, es capicua
+    if (invertido == n) {
+        cout << n << " es capicua" << endl;
+    } else {
+        cout << n << " no es capicua" << endl;
+    }
+
+    return 0;
+}
