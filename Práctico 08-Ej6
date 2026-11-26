@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void leer(double v[], int &n);
+void mostrar(double v[], int n, string msg);
+void promediosTres(double A[], int n, double B[], int &m);
+
+int main() {
+    int n, m;
+    double A[100], B[100];
+    leer(A, n);
+    promediosTres(A, n, B, m);
+    mostrar(A, n, "Vector A");
+    mostrar(B, m, "Vector B (Promedios)");
+    return 0;
+}
+
+void leer(double v[], int &n) {
+    do {
+        cout << "Cantidad (n >= 3): "; cin >> n;
+    } while (n < 3);
+    for (int i = 0; i < n; i++) cin >> v[i];
+}
+
+void mostrar(double v[], int n, string msg) {
+    cout << msg << ": ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << endl;
+}
+
+void promediosTres(double A[], int n, double B[], int &m) {
+    m = n - 2;
+    for (int i = 0; i < m; i++) {
+        B[i] = (A[i] + A[i+1] + A[i+2]) / 3.0;
+    }
+}
