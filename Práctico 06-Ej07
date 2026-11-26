@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+void SISTEMA_LINEAL(double a, double b, double c, double d, double e, double f) {
+    double determinante = (a * e) - (b * d);
+    
+    if (determinante != 0) {
+        double X = ((c * e) - (b * f)) / determinante;
+        double Y = ((a * f) - (c * d)) / determinante;
+        cout << "Solucion unica: X = " << X << ", Y = " << Y << endl;
+    } else {
+        cout << "El sistema no tiene solucion unica (pueden ser infinitas o sin solucion)." << endl;
+    }
+}
+
+int main() {
+    double a, b, c, d, e, f;
+    cout << "Ecuacion 1 (aX + bY = c), ingrese a, b, c: ";
+    cin >> a >> b >> c;
+    cout << "Ecuacion 2 (dX + eY = f), ingrese d, e, f: ";
+    cin >> d >> e >> f;
+    
+    SISTEMA_LINEAL(a, b, c, d, e, f);
+    return 0;
+}
