@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, i;
+    int signo = 1;
+    double x, potencia = 1, factorial = 1, s = 0;
+
+    do {
+        cout << "Ingrese N (impar): ";
+        cin >> n;
+    } while (n % 2 == 0);
+
+    cout << "Ingrese X: ";
+    cin >> x;
+
+    for (i = 1; i <= n; i++) {
+        potencia = potencia * x;
+        factorial = factorial * i;
+
+        if (i % 2 != 0) {
+            s = s + signo * potencia / factorial;
+            signo = -signo;
+        }
+    }
+
+    cout << "S = " << s << endl;
+
+    return 0;
+}
