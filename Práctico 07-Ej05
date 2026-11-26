@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+void SISTEMA(double A, double B, double C, double D, double E, double F, double &X, double &Y) {
+    // Al despejar Ax + By = -C y Dx + Ey = -F
+    double termino_indep1 = -C;
+    double termino_indep2 = -F;
+    
+    // Determinante principal (regla de Cramer)
+    double determinante = (A * E) - (B * D);
+    
+    if (determinante != 0) {
+        X = ((termino_indep1 * E) - (B * termino_indep2)) / determinante;
+        Y = ((A * termino_indep2) - (termino_indep1 * D)) / determinante;
+        cout << "Solucion del sistema: X = " << X << ", Y = " << Y << endl;
+    } else {
+        cout << "El sistema no tiene solucion unica." << endl;
+    }
+}
+
+int main() {
+    double X, Y;
+    // Prueba con el ejemplo del PDF: x + 2y + 3 = 0  y  4x + 5y + 6 = 0
+    cout << "Calculando el sistema de prueba del practico..." << endl;
+    SISTEMA(1, 2, 3, 4, 5, 6, X, Y);
+    return 0;
+}
