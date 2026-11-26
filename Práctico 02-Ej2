@@ -1,0 +1,13 @@
+Algoritmo Suma
+    Definir n1, n2, adicion Como Entero
+
+    Escribir "Ingrese el primer numero"
+    Leer n1
+
+    Escribir "Ingrese el segundo numero"
+    Leer n2
+
+    adicion <- n1 + n2
+
+    Escribir "Resultado: ", adicion
+FinAlgoritmo
