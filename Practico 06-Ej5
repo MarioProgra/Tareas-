@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+void ESTACION(int d, int m) {
+    // Para simplificar condiciones, combinamos mes y dia (ej: 21 de marzo = 321)
+    int fecha = (m * 100) + d; 
+    
+    if (fecha >= 321 && fecha < 621) {
+        cout << "Es otono" << endl;
+    } else if (fecha >= 621 && fecha < 921) {
+        cout << "Es invierno" << endl;
+    } else if (fecha >= 921 && fecha < 1221) {
+        cout << "Es primavera" << endl;
+    } else {
+        cout << "Es verano" << endl;
+    }
+}
+
+int main() {
+    int d, m, a;
+    cout << "Ingrese la fecha (dia mes anio separados por espacio): ";
+    cin >> d >> m >> a;
+    
+    ESTACION(d, m);
+    return 0;
+}
