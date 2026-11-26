@@ -1,0 +1,9 @@
+Inicio
+1. Leer los coeficientes a, b y c.
+2. Calcular el discriminante D = b² - 4*a*c.
+3. Si D < 0, indicar que no hay soluciones reales.
+4. Si D >= 0:
+   Calcular x1 = (-b + raiz(D)) / (2*a).
+   Calcular x2 = (-b - raiz(D)) / (2*a).
+5. Mostrar x1 y x2.
+Fin
